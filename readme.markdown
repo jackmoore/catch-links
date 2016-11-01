@@ -36,23 +36,27 @@ We'll intercept the relative links `<host>/a` and `<host>/b`, printing them.
 The external link to npmjs.org will go through as usual.
 
 ``` js
-var catchLinks = require('catch-links');
+var getLocalLink = require('catch-links');
 
-window.addEventListener('click', catchLinks(function (event, anchor) {
-  event.preventDefault();
-  console.log(anchor.href);
-}));
+window.addEventListener('click', function (e) {
+  const anchor = getLocalLink(e);
+
+  if (anchor) {
+    e.preventDefault();
+    console.log(anchor.href);
+  }
+});
 ```
 
 # methods
 
 ``` js
-var catchLinks = require('catch-links')
+var getLocalLink = require('catch-links')
 ```
 
-## catchLinks(cb)
+## getLocalLink(event)
 
-Fire `cb(event, anchor)` whenever an anchor tag with an in-server url is clicked.
+Returns the anchor element if the anchor element is clicked and has an in-server url.
 
 # install
 
